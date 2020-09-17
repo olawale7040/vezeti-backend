@@ -1,0 +1,47 @@
+app_id = "1074434"
+key = "6f5773bf7b0be44995bf"
+secret = "47575f5400952bbfcbcc"
+cluster = "eu"
+
+
+sendGrid Api_key = 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
+
+
+env-variable
+echo "export SENDGRID_API_KEY='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'" > sendgrid.env
+echo "sendgrid.env" >> .gitignore
+source ./sendgrid.env
+
+npm install --save @sendgrid/mail
+
+
+// using Twilio SendGrid's v3 Node.js Library
+// https://github.com/sendgrid/sendgrid-nodejs
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+const msg = {
+  to: 'test@example.com',
+  from: 'test@example.com',
+  subject: 'Sending with Twilio SendGrid is Fun',
+  text: 'and easy to do anywhere, even with Node.js',
+  html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+};
+sgMail.send(msg);
+
+
+
+handleSubmit(){
+        Axios.post("http://localhost:5000/reset-password", {
+          "email": "lukuman7040@gmail.com","message": "You just logged in to your Vezeti account",
+          "mailSubject":"Successfull Login Vezeti Platform",
+          "firstName":"Adekunle",
+          "lastName":"Luqman",
+          "phone":"07067388688",
+          "accountBalance":"20,000"
+        })
+      .then(response=>{
+          console.log("Success sendgrid",response);
+          }
+
+      )
+    }
